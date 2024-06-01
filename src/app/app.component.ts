@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
 
+import { HomeComponent } from "./systems/self/home/home.component";
+
+// import { HomeComponent } from "";
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less'
+  imports: [RouterOutlet, HomeComponent],
+  template: `
+    <div>你好世界</div>
+    <qy-home></qy-home>
+  `
 })
 export class AppComponent {
-  title = 'qiuyself';
+  title = "qiuyself";
+
+  constructor() {}
 }
