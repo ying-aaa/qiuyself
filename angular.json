@@ -29,12 +29,21 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              {
+               "glob": "**/*",
+               "input": "node_modules/cesium/Build/Cesium",
+               "output": "./assets/cesium"
+             }
             ],
             "styles": [
-              "src/styles.less"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.less",
+              "node_modules/cesium/Build/Cesium/Widgets/widgets.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/cesium/Build/Cesium/Cesium.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -96,6 +105,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.less"
             ],
             "scripts": []
