@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, TemplateRef, viewChild, AfterViewInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, TemplateRef, viewChild, AfterViewInit, inject, Input } from "@angular/core";
 
 import { QyCesiumService } from "../../services/base-cesium.service";
 
@@ -8,7 +8,7 @@ import { QyCesiumService } from "../../services/base-cesium.service";
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div #cesiumContainer id="cesium-container"></div>
+    <div [ngStyle]="styles" #cesiumContainer id="cesium-container"></div>
   `,
   styles: `
     :host {
@@ -17,6 +17,7 @@ import { QyCesiumService } from "../../services/base-cesium.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseCesiumComponent implements AfterViewInit {
+  @Input("styles") styles = {};
   cesiumInstance: TemplateRef<Element> | any = viewChild<ElementRef>("cesiumContainer");
 
   public cesiumService = inject(QyCesiumService);

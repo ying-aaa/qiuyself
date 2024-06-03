@@ -7,10 +7,9 @@ import { HomeComponent } from "./systems/self/page/home/home.component";
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, HomeComponent],
+  imports: [RouterOutlet],
   template: `
-    <div>你好世界</div>
-    <qy-home></qy-home>
+    <router-outlet #outlet="outlet"></router-outlet>
   `
 })
 export class AppComponent {

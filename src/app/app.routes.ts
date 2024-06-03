@@ -1,3 +1,6 @@
 import { Routes } from "@angular/router";
 
-export const routes: Routes = [];
+export const appRoutes: Routes = [
+  //   { path: "self", redirectTo: "/login/login-form", pathMatch: "full" },
+  { path: "", data: { preload: true }, loadChildren: () => import("./systems/self/self-routing") }
+];
