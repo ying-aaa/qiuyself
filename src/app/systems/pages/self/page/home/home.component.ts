@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, Signal, signal, viewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
@@ -38,18 +38,24 @@ const cesiumStyle = {
   imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent]
 })
 export class HomeComponent {
-  baseCesium = viewChild(BaseCesiumComponent);
+  baseCesium = viewChild.required(BaseCesiumComponent);
 
   value = signal(1);
 
   public cesiumService = inject(QyCesiumService);
   cesiumStyle = cesiumStyle;
 
+  constructor() {
+    this.flyto();
+  }
+
   flyto(): void {
-    (this.baseCesium() as BaseCesiumComponent).cesiumService.flight();
+    setTimeout(() => {
+      this.baseCesium().cesiumService.flight();
+    }, 1000);
   }
 
   flyto1(): void {
-    (this.baseCesium() as BaseCesiumComponent).cesiumService.flight1();
+    this.baseCesium().cesiumService.flight1();
   }
 }

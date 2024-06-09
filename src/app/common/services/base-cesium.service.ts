@@ -28,7 +28,7 @@ export class QyCesiumService {
     this.viewer._cesiumWidget._creditContainer.style.display = "none";
     this.viewer.scene.skyBox.show = false; //关闭天空盒，否则会显示天空颜色
     this.viewer.scene.undergroundMode = true; //重要，开启地下模式，设置基色透明，这样就看不见黑色地球了
-    this.viewer.scene.backgroundColor = Cesium.Color.red;
+    this.viewer.scene.backgroundColor = Cesium.Color.RED;
 
     this.flight();
   }

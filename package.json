@@ -11,6 +11,8 @@
     "lint:fix": "eslint --fix --cache . --ext .ts,.html",
     "lint:style": "npx stylelint \"src/**/*.less\" --fix",
     "test": "ng test",
+    "dev:css": "unocss --watch",
+    "build:css": "unocss",
     "serve:ssr:qiuyself": "node dist/qiuyself/server/server.mjs"
   },
   "private": true,
@@ -68,6 +70,7 @@
     "stylelint-config-standard": "^27.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "stylelint-order": "^6.0.3",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "unocss": "^0.60.0"
   }
 }
