@@ -19,16 +19,28 @@ export class QyCesiumService {
       backgroundColor: Cesium.Color.TRANSPARENT,
       homeButton: false, //隐藏视角返回初始位置按钮
       sceneModePicker: false, //隐藏视角模式3D 2D CV
-      // baseLayerPicker: false, //隐藏图层选择
+      baseLayerPicker: false, //隐藏图层选择
       navigationHelpButton: false, //隐藏帮助
       animation: false, //隐藏动画控件
       timeline: false, //隐藏时间线控件
-      fullscreenButton: false //隐藏全屏
+      fullscreenButton: false, //隐藏全屏
+      contextOptions: {
+        webgl: {
+          alpha: true
+        }
+      }
     });
-    this.viewer._cesiumWidget._creditContainer.style.display = "none";
+    //移除默认图层
+    // this.viewer.imageryLayers.removeAll();
+    // //添加arcgis地形或自定义地形
+    // var terrain = new Cesium.ArcGISTiledElevationTerrainProvider({
+    //   url: "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"
+    // });
+    // this.viewer.terrainProvider = terrain;
+    // this.viewer._cesiumWidget._creditContainer.style.display = "none";
     this.viewer.scene.skyBox.show = false; //关闭天空盒，否则会显示天空颜色
-    this.viewer.scene.undergroundMode = true; //重要，开启地下模式，设置基色透明，这样就看不见黑色地球了
-    this.viewer.scene.backgroundColor = Cesium.Color.RED;
+    // this.viewer.scene.undergroundMode = true; //重要，开启地下模式，设置基色透明，这样就看不见黑色地球了
+    this.viewer.scene.backgroundColor = new Cesium.Color(0.0, 0.0, 0.0, 0.0);
 
     this.flight();
   }

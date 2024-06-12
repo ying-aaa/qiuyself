@@ -43,7 +43,9 @@
               "src/styles/reset.less",
               "src/styles/uno.css"
             ],
-            "scripts": ["node_modules/cesium/Build/Cesium/Cesium.js"],
+            "scripts": [
+              "node_modules/cesium/Build/Cesium/Cesium.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
