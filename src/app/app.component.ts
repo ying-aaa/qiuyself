@@ -7,11 +7,17 @@ import { RouterOutlet } from "@angular/router";
   standalone: true,
   imports: [RouterOutlet],
   template: `
-    <router-outlet #outlet="outlet"></router-outlet>
+    <router-outlet (activate)="onActivateComponent($event)" #outlet="outlet"></router-outlet>
   `
 })
 export class AppComponent {
   title = "qiuyself";
 
   constructor() {}
+
+  onActivateComponent($event: any): void {
+    console.log("%c Line:29 🍒 $event", "color:#2eafb0", $event);
+    // @ts-ignore
+    document && (document.querySelector(".qy-loading").style.display = "none");
+  }
 }

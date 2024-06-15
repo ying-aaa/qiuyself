@@ -43,9 +43,7 @@
               "src/styles/reset.less",
               "src/styles/uno.css"
             ],
-            "scripts": [
-              "node_modules/cesium/Build/Cesium/Cesium.js"
-            ],
+            "scripts": ["node_modules/cesium/Build/Cesium/Cesium.js"],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -54,19 +52,30 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "6MB",
+                  "maximumError": "6MB"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kB",
                   "maximumError": "4kB"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
               "optimization": false,

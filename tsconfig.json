@@ -28,7 +28,7 @@
       "@app/*": ["src/app/*"],
       "@app": ["src/app"],
       "@store/*": ["src/app/core/services/store/*"],
-      "@config/*": ["src/app/config/*"],
+      "@config/*": ["src/config/*"],
       "@core/*": ["src/app/core/*"],
       "@services/*": ["src/app/core/services/http/*"],
       "@utils/*": ["src/app/utils/*"],

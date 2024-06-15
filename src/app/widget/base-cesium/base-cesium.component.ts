@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, ElementRef, TemplateRef, viewChild, AfterViewInit, inject, Input } from "@angular/core";
 
-import { QyCesiumService } from "../../services/base-cesium.service";
+import { QyCesiumService } from "./base-cesium.service";
 
 @Component({
   selector: "qy-base-cesium",
