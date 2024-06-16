@@ -12,6 +12,11 @@ import { QyCesiumService } from "./base-cesium.service";
   `,
   styles: `
     :host {
+      ::ng-deep {
+        .cesium-viewer-bottom {
+          display: none;
+        }
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

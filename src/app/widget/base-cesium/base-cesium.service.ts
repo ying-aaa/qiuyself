@@ -23,7 +23,7 @@ export class QyCesiumService {
       // backgroundColor: Cesium.Color.TRANSPARENT,
       homeButton: false, //隐藏视角返回初始位置按钮
       sceneModePicker: false, //隐藏视角模式3D 2D CV
-      // baseLayerPicker: false, //隐藏图层选择
+      baseLayerPicker: false, //隐藏图层选择
       navigationHelpButton: false, //隐藏帮助
       animation: false, //隐藏动画控件
       timeline: false, //隐藏时间线控件

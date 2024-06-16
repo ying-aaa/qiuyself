@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Signal, signal, viewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, Signal, signal, viewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
@@ -7,6 +7,8 @@ import { LanguageComponent } from "@app/common/component/language/language.compo
 import { QiuyLogoComponent } from "@app/common/component/qiuy-logo/qiuy-logo.component";
 import { BaseCesiumComponent } from "@app/widget/base-cesium/base-cesium.component";
 import { QyCesiumService } from "@app/widget/base-cesium/base-cesium.service";
+
+import { MenuComponent } from "../../components/menu/menu.component";
 
 const cesiumStyle = {
   position: "absolute",
@@ -34,6 +36,7 @@ const cesiumStyle = {
           <div class="lh-24px">基于 Angular + Nest</div>
         </div>
       </div>
+      <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
     </div>
   `,
@@ -48,27 +51,19 @@ const cesiumStyle = {
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent, LanguageComponent]
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent, LanguageComponent, MenuComponent]
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   baseCesium = viewChild.required(BaseCesiumComponent);
-
-  value = signal(1);
 
   public cesiumService = inject(QyCesiumService);
   cesiumStyle = cesiumStyle;
 
-  constructor() {
+  ngAfterViewInit(): void {
     this.flyto();
   }
 
   flyto(): void {
-    setTimeout(() => {
-      this.baseCesium().cesiumService.flight();
-    }, 1000);
+    this.baseCesium().cesiumService.flight();
   }
-
-  // flyto1(): void {
-  //   this.baseCesium().cesiumService.flight1();
-  // }
 }
