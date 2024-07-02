@@ -18,7 +18,7 @@ interface IMenuStructure {
     <div class="relative z-888 h-80px flex items-center flex-row-reverse pr-10px">
       <div class="flex w-fit">
         @for (item of menus(); track $index) {
-          <div class="text-18px px-24px text-#fff cursor-pointer h-30px flex items-end font-bold">
+          <div class="text-18px px-24px text-#fff cursor-pointer h-30px flex items-end font-bold hover:drop-shadow-[0px_0px_10px_#a0d8ff]">
             <mat-icon [svgIcon]="item.icon" aria-hidden="false" class="w-28px! h-28px!" aria-label="Example thumbs up SVG icon"></mat-icon>
             <div *ngIf="item.name" class="lh-24px ml-8px">{{ item.name }}</div>
           </div>
@@ -26,7 +26,7 @@ interface IMenuStructure {
       </div>
     </div>
   `,
-  styleUrl: "./menu.component.less",
+  styles: "",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {

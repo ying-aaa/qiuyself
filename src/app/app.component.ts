@@ -16,8 +16,7 @@ export class AppComponent {
   constructor() {}
 
   onActivateComponent($event: any): void {
-    console.log("%c Line:29 🍒 $event", "color:#2eafb0", $event);
     // @ts-ignore
-    document && (document.querySelector(".qy-loading").style.display = "none");
+    document && document.querySelector(".qy-loading").remove();
   }
 }

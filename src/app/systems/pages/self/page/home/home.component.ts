@@ -8,7 +8,7 @@ import { QiuyLogoComponent } from "@app/common/component/qiuy-logo/qiuy-logo.com
 import { BaseCesiumComponent } from "@app/widget/base-cesium/base-cesium.component";
 import { QyCesiumService } from "@app/widget/base-cesium/base-cesium.service";
 
-import { MenuComponent } from "../../components/menu/menu.component";
+import { MenuComponent } from "./menu/menu.component";
 
 const cesiumStyle = {
   position: "absolute",
@@ -22,19 +22,24 @@ const cesiumStyle = {
   selector: "qy-home",
   standalone: true,
   template: `
-    <div class="self-container">
+    <div class="self-container self-backdrop-fit">
       <qy-qiuy-logo class="cursor-pointer" (click)="flyto()"></qy-qiuy-logo>
       <qy-language></qy-language>
-      <div class="absolute z-999 w-306px font-bold  left-50% -translate-x-50% top-202px">
-        <div class="text-42px mb-28px">
-          <div class="lh-45px text-#a193c6">Not reading</div>
-          <div class="lh-45px text-#b6cfd3">poetry</div>
-          <div class="lh-45px text-#90eaf2 text-right">- Record</div>
+
+      <!-- <div class="shape qiuy-photo"></div> -->
+      <div class="shape qiuy-photo-bg">
+        <div class="absolute z-999 w-306px font-bold -right-105% -translate-x-50% top-202px">
+          <div class="text-42px mb-28px">
+            <div class="lh-45px text-#a193c6">Not reading</div>
+            <div class="lh-45px text-#b6cfd3">poetry</div>
+            <div class="lh-45px text-#90eaf2 text-right">- Record</div>
+          </div>
+          <div class="text-16px text-#fff">
+            <div class="lh-24px">个人集，多数内容记录于此</div>
+            <div class="lh-24px">基于 Angular + Nest</div>
+          </div>
         </div>
-        <div class="text-16px text-#fff">
-          <div class="lh-24px">个人集，多数内容记录于此</div>
-          <div class="lh-24px">基于 Angular + Nest</div>
-        </div>
+        <img src="assets/self/home/qiuy.pic.jpg" class="backdrop-fit" width="100%" height="100%" />
       </div>
       <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
@@ -45,8 +50,38 @@ const cesiumStyle = {
       .self-container {
         width: 100%;
         height: 100%;
-        position: relative;
-        background: radial-gradient(50% 50% at 50% 50%, #001c6c 0%, #06080e 100%);
+        // position: relative;
+        background-image: url("/assets/self/home/starry-sky.png");
+        background-size: cover;
+      }
+      .self-backdrop-fit {
+        background-position: -30% 50%;
+        background-size: cover;
+        object-fit: cover;
+      }
+      .shape {
+        z-index: 999;
+        width: 460px;
+        height: 460px;
+        top: 220px;
+        right: 20%;
+        position: absolute;
+        img {
+          border-radius: 73% 27% 75% 25% / 60% 72% 28% 40%;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          transform: scale(1.25);
+          left: 35%;
+          bottom: -100px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 73% 27% 75% 25% / 60% 72% 28% 40%;
+          backdrop-filter: blur(5px);
+          z-index: -1;
+        }
       }
     }
   `,
