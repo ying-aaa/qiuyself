@@ -1,0 +1,77 @@
+<h6>123</h6>
+<div class="card h-100%">
+  <p-splitter [style]="{ height: '100%' }" [panelSizes]="[15, 85]" [minSizes]="[10, 0]" styleClass="mb-5">
+    <ng-template pTemplate>
+      <div class="col flex align-items-center justify-content-center w-full bg-blue-1">
+        <div class="card flex justify-content-center">
+          <p-autoComplete [(ngModel)]="selectedItem" [suggestions]="suggestions" (completeMethod)="search($event)" />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <p-splitter layout="vertical" [panelSizes]="[5, 95]">
+        <ng-template pTemplate>
+          <div style="flex-grow: 1" class="flex align-items-center justify-content-center bg-pink-1">Panel 2</div>
+        </ng-template>
+        <ng-template pTemplate>
+          <p-splitter [panelSizes]="[80, 20]">
+            <ng-template pTemplate>
+              <div class="card w-100% h-100%">
+                <div class="card xl:flex xl:justify-content-center">
+                  <div class="p-20px card flex flex-wrap gap-3 justify-content-center">
+                    <p-button label="Primary" [text]="true" [raised]="true" />
+                    <p-button label="Secondary" [text]="true" [raised]="true" severity="secondary" />
+                    <p-button label="Success" [text]="true" [raised]="true" severity="success" />
+                    <p-button label="Info" [text]="true" [raised]="true" severity="info" />
+                    <p-button label="Warning" [text]="true" [raised]="true" severity="warning" />
+                    <p-button label="Help" [text]="true" [raised]="true" severity="help" />
+                    <p-button label="Danger" [text]="true" [raised]="true" severity="danger" />
+                    <p-button label="Plain" [text]="true" [raised]="true" [plain]="true" />
+                  </div>
+                  <div pFocusTrap class="card flex align-items-center justify-content-center flex-wrap gap-3">
+                    <div>
+                      <h4>Input</h4>
+                      <input id="input" type="text" size="30" pInputText />
+                    </div>
+                    <div>
+                      <h4>Float Label</h4>
+                      <span class="p-float-label">
+                        <input id="float-input" type="text" size="30" pInputText />
+                        <label for="float-input">Username</label>
+                      </span>
+                    </div>
+                    <div>
+                      <h4>Disabled Input</h4>
+                      <input id="disabled-input" type="text" size="30" pInputText [disabled]="true" />
+                    </div>
+                    <div>
+                      <h4>Input with tabindex -1</h4>
+                      <input type="text" size="30" pInputText tabindex="-1" />
+                    </div>
+                    <div>
+                      <h4>Button</h4>
+                      <p-button icon="pi pi-check" label="Check" />
+                    </div>
+                    <div>
+                      <h4>Dropdown</h4>
+                      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate></ng-template>
+          </p-splitter>
+        </ng-template>
+      </p-splitter>
+    </ng-template>
+  </p-splitter>
+</div>
+
+<div class="card flex justify-content-center">
+  <p-selectButton [options]="justifyOptions" [(ngModel)]="value" optionLabel="icon">
+    <ng-template let-item pTemplate>
+      <i [class]="item.icon"></i>
+    </ng-template>
+  </p-selectButton>
+</div>

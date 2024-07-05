@@ -1,11 +1,11 @@
 import { Route } from "@angular/router";
 
 export default [
-  { path: "", redirectTo: "form", pathMatch: "full" },
+  { path: "", redirectTo: "home", pathMatch: "full" },
   {
     title: "表单",
-    path: "form",
-    data: { preload: true, key: "form" },
-    loadComponent: () => import("./pages/form/form.component").then(m => m.FormComponent)
+    path: "home",
+    data: { preload: true, key: "home" },
+    loadComponent: () => import("./pages/qy-lowcode-home/qy-lowcode-home.component").then(m => m.FormComponent)
   }
 ] as Route[];
