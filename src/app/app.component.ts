@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { Component, inject, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 
 import { FilterMatchMode, PrimeNGConfig } from "primeng/api";
-// import { HomeComponent } from "";
+
 @Component({
   selector: "app-root",
   standalone: true,
@@ -12,8 +13,7 @@ import { FilterMatchMode, PrimeNGConfig } from "primeng/api";
   `
 })
 export class AppComponent implements OnInit {
-  title = "qiuyself";
-
+  private readonly doc = inject(DOCUMENT);
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
   }
 
   onActivateComponent($event: any): void {
-    // @ts-ignore
-    document && document.querySelector(".qy-loading")?.remove();
+    this.doc.querySelector(".qy-loading")?.remove();
   }
 }

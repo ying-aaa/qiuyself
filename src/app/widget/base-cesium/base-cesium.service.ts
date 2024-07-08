@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Injectable } from "@angular/core";
-// declare var Cesium: any;
+declare var Cesium: any;
 @Injectable({
   providedIn: "root"
 })
@@ -43,34 +43,34 @@ export class QyCesiumService {
     this.viewer.clock.currentTime = Cesium.JulianDate.fromIso8601("2023-01-01T12:08:00");
 
     // setup alternative terrain providers
-    const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+    // const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
 
-    // Sine wave
-    const customHeightmapWidth = 32;
-    const customHeightmapHeight = 32;
-    const customHeightmapProvider = new Cesium.CustomHeightmapTerrainProvider({
-      width: customHeightmapWidth,
-      height: customHeightmapHeight,
-      callback: function (x, y, level) {
-        const width = customHeightmapWidth;
-        const height = customHeightmapHeight;
-        const buffer = new Float32Array(width * height);
+    // // Sine wave
+    // const customHeightmapWidth = 32;
+    // const customHeightmapHeight = 32;
+    // const customHeightmapProvider = new Cesium.CustomHeightmapTerrainProvider({
+    //   width: customHeightmapWidth,
+    //   height: customHeightmapHeight,
+    //   callback: function (x, y, level) {
+    //     const width = customHeightmapWidth;
+    //     const height = customHeightmapHeight;
+    //     const buffer = new Float32Array(width * height);
 
-        for (let yy = 0; yy < height; yy++) {
-          for (let xx = 0; xx < width; xx++) {
-            const u = (x + xx / (width - 1)) / Math.pow(2, level);
-            const v = (y + yy / (height - 1)) / Math.pow(2, level);
+    //     for (let yy = 0; yy < height; yy++) {
+    //       for (let xx = 0; xx < width; xx++) {
+    //         const u = (x + xx / (width - 1)) / Math.pow(2, level);
+    //         const v = (y + yy / (height - 1)) / Math.pow(2, level);
 
-            const heightValue = 4000 * (Math.sin(8000 * v) * 0.5 + 0.5);
+    //         const heightValue = 4000 * (Math.sin(8000 * v) * 0.5 + 0.5);
 
-            const index = yy * width + xx;
-            buffer[index] = heightValue;
-          }
-        }
+    //         const index = yy * width + xx;
+    //         buffer[index] = heightValue;
+    //       }
+    //     }
 
-        return buffer;
-      }
-    });
+    //     return buffer;
+    //   }
+    // });
 
     // Sandcastle.addToolbarMenu(
     //   [
@@ -179,53 +179,53 @@ export class QyCesiumService {
     //   "zoomButtons"
     // );
 
-    let terrainSamplePositions;
+    // let terrainSamplePositions;
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function lookAtMtEverest() {
-      const target = new Cesium.Cartesian3(300770.50872389384, 5634912.131394585, 2978152.2865545116);
-      const offset = new Cesium.Cartesian3(6344.974098678562, -793.3419798081741, 2499.9508860763162);
-      this.viewer.camera.lookAt(target, offset);
-      this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-    }
+    // // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    // function lookAtMtEverest() {
+    //   const target = new Cesium.Cartesian3(300770.50872389384, 5634912.131394585, 2978152.2865545116);
+    //   const offset = new Cesium.Cartesian3(6344.974098678562, -793.3419798081741, 2499.9508860763162);
+    //   this.viewer.camera.lookAt(target, offset);
+    //   this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    // }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function sampleTerrainSuccess(terrainSamplePositions) {
-      const ellipsoid = Cesium.Ellipsoid.WGS84;
+    // // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    // function sampleTerrainSuccess(terrainSamplePositions) {
+    //   const ellipsoid = Cesium.Ellipsoid.WGS84;
 
-      //By default, Cesium does not obsure geometry
-      //behind terrain. Setting this flag enables that.
-      this.viewer.scene.globe.depthTestAgainstTerrain = true;
+    //   //By default, Cesium does not obsure geometry
+    //   //behind terrain. Setting this flag enables that.
+    //   this.viewer.scene.globe.depthTestAgainstTerrain = true;
 
-      this.viewer.entities.suspendEvents();
-      this.viewer.entities.removeAll();
+    //   this.viewer.entities.suspendEvents();
+    //   this.viewer.entities.removeAll();
 
-      for (let i = 0; i < terrainSamplePositions.length; ++i) {
-        const position = terrainSamplePositions[i];
+    //   for (let i = 0; i < terrainSamplePositions.length; ++i) {
+    //     const position = terrainSamplePositions[i];
 
-        this.viewer.entities.add({
-          name: position.height.toFixed(1),
-          position: ellipsoid.cartographicToCartesian(position),
-          billboard: {
-            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-            scale: 0.7,
-            image: "../images/facility.gif"
-          },
-          label: {
-            text: position.height.toFixed(1),
-            font: "10pt monospace",
-            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-            pixelOffset: new Cesium.Cartesian2(0, -14),
-            fillColor: Cesium.Color.BLACK,
-            outlineColor: Cesium.Color.BLACK,
-            showBackground: true,
-            backgroundColor: new Cesium.Color(0.9, 0.9, 0.9, 0.7),
-            backgroundPadding: new Cesium.Cartesian2(4, 3)
-          }
-        });
-      }
-      this.viewer.entities.resumeEvents();
-    }
+    //     this.viewer.entities.add({
+    //       name: position.height.toFixed(1),
+    //       position: ellipsoid.cartographicToCartesian(position),
+    //       billboard: {
+    //         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    //         scale: 0.7,
+    //         image: "../images/facility.gif"
+    //       },
+    //       label: {
+    //         text: position.height.toFixed(1),
+    //         font: "10pt monospace",
+    //         horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+    //         pixelOffset: new Cesium.Cartesian2(0, -14),
+    //         fillColor: Cesium.Color.BLACK,
+    //         outlineColor: Cesium.Color.BLACK,
+    //         showBackground: true,
+    //         backgroundColor: new Cesium.Color(0.9, 0.9, 0.9, 0.7),
+    //         backgroundPadding: new Cesium.Cartesian2(4, 3)
+    //       }
+    //     });
+    //   }
+    //   this.viewer.entities.resumeEvents();
+    // }
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     function createGrid(rectangleHalfSize) {

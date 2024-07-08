@@ -38,12 +38,12 @@
             ],
             "styles": [
               "src/styles/styles.less",
-              "node_modules/cesium/Build/Cesium/Widgets/widgets.css",
               "src/styles/uno.css",
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/aura-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/cesium/Build/Cesium/Widgets/widgets.css"
 
             ],
             "stylePreprocessorOptions": {
