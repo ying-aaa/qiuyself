@@ -1,11 +1,19 @@
-<h6>123</h6>
 <div class="card h-100%">
-  <p-splitter [style]="{ height: '100%' }" [panelSizes]="[15, 85]" [minSizes]="[10, 0]" styleClass="mb-5">
+  <p-splitter [style]="{ height: '100%' }" [panelSizes]="[18, 82]" [minSizes]="[10, 0]" styleClass="mb-5">
     <ng-template pTemplate>
-      <div class="col flex align-items-center justify-content-center w-full bg-blue-1">
-        <div class="card flex justify-content-center">
-          <p-autoComplete [(ngModel)]="selectedItem" [suggestions]="suggestions" (completeMethod)="search($event)" />
-        </div>
+      <div class="col w-full p-8px">
+        <p-panelMenu [model]="itemsnode" styleClass="w-full">
+          <ng-template pTemplate="item" let-item>
+            <a pRipple class="group flex align-items-center px-3 py-2 cursor-pointer">
+              <span class="ml-2">
+                {{ item.label }}
+              </span>
+              <span class="hidden group-hover:block! ml-auto surface-border border-round text-xs">
+                <i class="pi pi-ellipsis-h display-none hover:block" style="color: slateblue"></i>
+              </span>
+            </a>
+          </ng-template>
+        </p-panelMenu>
       </div>
     </ng-template>
     <ng-template pTemplate>
@@ -66,12 +74,4 @@
       </p-splitter>
     </ng-template>
   </p-splitter>
-</div>
-
-<div class="card flex justify-content-center">
-  <p-selectButton [options]="justifyOptions" [(ngModel)]="value" optionLabel="icon">
-    <ng-template let-item pTemplate>
-      <i [class]="item.icon"></i>
-    </ng-template>
-  </p-selectButton>
 </div>

@@ -1,12 +1,15 @@
+import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
+import { MenuItem } from "primeng/api";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
 import { FocusTrapModule } from "primeng/focustrap";
 import { InputTextModule } from "primeng/inputtext";
 import { OrderListModule } from "primeng/orderlist";
+import { PanelMenuModule } from "primeng/panelmenu";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { SplitterModule } from "primeng/splitter";
 
@@ -25,7 +28,7 @@ interface AutoCompleteCompleteEvent {
 @Component({
   selector: "qy-lowcode-home",
   standalone: true,
-  imports: [SelectButtonModule, SplitterModule, OrderListModule, AutoCompleteModule, FocusTrapModule, ButtonModule, DropdownModule, FormsModule, InputTextModule],
+  imports: [CommonModule, PanelMenuModule, SelectButtonModule, SplitterModule, OrderListModule, AutoCompleteModule, FocusTrapModule, ButtonModule, DropdownModule, FormsModule, InputTextModule],
   templateUrl: "./qy-lowcode-home.component.html",
   styleUrl: "./qy-lowcode-home.component.less",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,5 +84,48 @@ export class FormComponent implements OnInit {
     { icon: "pi pi-align-right", justify: "Right" },
     { icon: "pi pi-align-center", justify: "Center" },
     { icon: "pi pi-align-justify", justify: "Justify" }
+  ];
+
+  itemsnode: MenuItem[] = [
+    {
+      label: "APP",
+      icon: "pi pi-file",
+      items: [
+        {
+          label: "Documents",
+          icon: "pi pi-file",
+          items: [
+            {
+              label: "Invoices",
+              icon: "pi pi-file-pdf",
+              items: [
+                {
+                  label: "Pending",
+                  icon: "pi pi-stop"
+                },
+                {
+                  label: "Paid",
+                  icon: "pi pi-check-circle"
+                }
+              ]
+            },
+            {
+              label: "Clients",
+              icon: "pi pi-users"
+            }
+          ]
+        },
+        {
+          label: "Images",
+          icon: "pi pi-image",
+          items: [
+            {
+              label: "Logos",
+              icon: "pi pi-image"
+            }
+          ]
+        }
+      ]
+    }
   ];
 }
