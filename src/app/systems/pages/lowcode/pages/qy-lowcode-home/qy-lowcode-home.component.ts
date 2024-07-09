@@ -2,16 +2,19 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { MenuItem } from "primeng/api";
+import { MenuItem, MessageService } from "primeng/api";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
 import { FocusTrapModule } from "primeng/focustrap";
 import { InputTextModule } from "primeng/inputtext";
+import { MenubarModule } from "primeng/menubar";
 import { OrderListModule } from "primeng/orderlist";
+import { OverlayPanelModule } from "primeng/overlaypanel";
 import { PanelMenuModule } from "primeng/panelmenu";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { SplitterModule } from "primeng/splitter";
+import { TieredMenuModule } from "primeng/tieredmenu";
 
 export interface Tile {
   color: string;
@@ -28,7 +31,23 @@ interface AutoCompleteCompleteEvent {
 @Component({
   selector: "qy-lowcode-home",
   standalone: true,
-  imports: [CommonModule, PanelMenuModule, SelectButtonModule, SplitterModule, OrderListModule, AutoCompleteModule, FocusTrapModule, ButtonModule, DropdownModule, FormsModule, InputTextModule],
+  imports: [
+    OverlayPanelModule,
+    CommonModule,
+    PanelMenuModule,
+    SelectButtonModule,
+    SplitterModule,
+    OrderListModule,
+    AutoCompleteModule,
+    FocusTrapModule,
+    ButtonModule,
+    DropdownModule,
+    FormsModule,
+    InputTextModule,
+    MenubarModule,
+    TieredMenuModule
+  ],
+  providers: [MessageService],
   templateUrl: "./qy-lowcode-home.component.html",
   styleUrl: "./qy-lowcode-home.component.less",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -47,6 +66,9 @@ export class FormComponent implements OnInit {
     { name: "Paris", code: "PRS" }
   ];
   suggestions: any;
+  menu: any;
+
+  constructor(private messageService: MessageService) {}
 
   search(event: AutoCompleteCompleteEvent): void {
     this.suggestions = [...Array(10).keys()].map(item => `${event.query}-${item}`);
@@ -89,43 +111,78 @@ export class FormComponent implements OnInit {
   itemsnode: MenuItem[] = [
     {
       label: "APP",
-      icon: "pi pi-file",
+      icon: "pi pi-copy",
       items: [
         {
           label: "Documents",
-          icon: "pi pi-file",
+          icon: "pi pi-copy",
           items: [
             {
-              label: "Invoices",
-              icon: "pi pi-file-pdf",
-              items: [
-                {
-                  label: "Pending",
-                  icon: "pi pi-stop"
-                },
-                {
-                  label: "Paid",
-                  icon: "pi pi-check-circle"
-                }
-              ]
+              label: "Clients",
+              icon: "pi pi-file"
             },
             {
               label: "Clients",
-              icon: "pi pi-users"
+              icon: "pi pi-file"
+            },
+            {
+              label: "Clients",
+              icon: "pi pi-file"
             }
           ]
         },
         {
           label: "Images",
-          icon: "pi pi-image",
+          icon: "pi pi-copy",
           items: [
             {
               label: "Logos",
-              icon: "pi pi-image"
+              icon: "pi pi-file"
             }
           ]
         }
       ]
     }
   ];
+
+  child = [
+    {
+      label: "页面",
+      icon: "pi pi-plus",
+      command: (event: any) => {
+        throw "";
+      }
+    },
+    {
+      label: "部件",
+      icon: "pi pi-eject",
+      command: (event: any) => {
+        throw "";
+      }
+    },
+    {
+      label: "重命名",
+      icon: "pi pi-sync",
+      command: (event: any) => {
+        throw "";
+      }
+    },
+    {
+      separator: true
+    },
+    {
+      label: "删除",
+      icon: "pi pi-trash",
+      mClass: "text-red hover:bg-red-1 hover:rounded-4px",
+      command: (event: any) => {
+        throw "";
+      }
+    }
+  ];
+
+  mouseleave(event: any, cb: any): void {
+    if (event.toElement.classList.contains("file-node")) {
+      cb(event);
+    }
+  }
 }
