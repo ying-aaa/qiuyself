@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 import { QMenuFileType } from "@app/systems/pages/lowcode/type/qy-lowcode-home.typs";
+import { BaseSvgComponent, QSvgType } from "@app/widget/base-svg/base-svg.component";
 import { customAlphabet } from "nanoid";
 import { TieredMenuModule } from "primeng/tieredmenu";
 
@@ -10,7 +11,7 @@ import { QyLowcodeService } from "../../../../services/qy-lowcode.service";
 @Component({
   selector: "qy-menu-file-handle",
   standalone: true,
-  imports: [CommonModule, TieredMenuModule],
+  imports: [CommonModule, TieredMenuModule, BaseSvgComponent],
   template: `
     <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="mouseleave($event, menu.toggle.bind(menu))" #item>
       <i class="pi pi-ellipsis-h display-none hover:block text-14px" style="color: slateblue"></i>
@@ -18,7 +19,12 @@ import { QyLowcodeService } from "../../../../services/qy-lowcode.service";
     <p-tieredMenu [autoDisplay]="false" (mouseleave)="menu.hide($event)" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="-translate-x-50% w-120px mt-0!">
       <ng-template pTemplate="item" let-item>
         <a pRipple class="file-node flex items-center px-8px py-5px cursor-pointer text-14px" [class]="item.mClass">
-          <i [class]="item.icon + ' text-primary'" class="text-12px"></i>
+          <!-- <i [class]="item.icon + ' text-primary'" class="text-12px"></i> -->
+          @if (item.svgType) {
+            <qy-base-svg [svgType]="item.svgType"></qy-base-svg>
+          } @else {
+            <i [class]="item.icon + ' text-primary'" class="text-12px"></i>
+          }
           <span class="ml-2">
             {{ item.label }}
           </span>
@@ -29,6 +35,8 @@ import { QyLowcodeService } from "../../../../services/qy-lowcode.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QyMenuFileHandleComponent {
+  QSvgType = QSvgType;
+
   constructor(public qyLowcodeService: QyLowcodeService) {}
 
   mouseleave(event: any, cb: any): void {
@@ -41,6 +49,26 @@ export class QyMenuFileHandleComponent {
     {
       label: "页面",
       icon: "pi pi-plus",
+      svgType: QSvgType.file,
+      command: (event: any) => {
+        const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
+        this.qyLowcodeService.menuFiles.update((value: any) => {
+          const data = this.qyLowcodeService.menuFiles();
+          data[0]?.items?.push({
+            label: "xxx",
+            icon: "pi pi-file",
+            type: QMenuFileType.file,
+            nanoid
+          });
+          return data;
+        });
+        throw "";
+      }
+    },
+    {
+      label: "目录",
+      icon: "pi pi-plus",
+      svgType: QSvgType.directory_close,
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
         this.qyLowcodeService.menuFiles.update((value: any) => {
@@ -53,21 +81,6 @@ export class QyMenuFileHandleComponent {
           });
           return data;
         });
-        throw "";
-      }
-    },
-    {
-      label: "目录",
-      icon: "pi pi-plus",
-      command: (event: any) => {
-        const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-        // this.qyLowcodeService.menuFiles.push({
-        //   label: "APP",
-        //   icon: "pi pi-copy",
-        //   type: QMenuFileType.directory,
-        //   nanoid
-        // });
-        // throw "";
       }
     },
     {

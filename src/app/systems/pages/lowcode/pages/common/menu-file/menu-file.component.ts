@@ -32,20 +32,6 @@ export class QyMenuFileComponent implements OnInit {
 
   constructor(public qyLowcodeService: QyLowcodeService) {}
 
-  // itemsnode: MenuItem[] = [
-  //   {
-  //     label: "APP",
-  //     icon: "pi pi-copy",
-  //     type: QMenuFileType.directory
-  //   }
-  // ];
-
-  generationMenuFile(type: string): void {
-    const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-    this;
-    throw "";
-  }
-
   ngOnInit(): void {
     new GenerationMenuFile(this);
   }
