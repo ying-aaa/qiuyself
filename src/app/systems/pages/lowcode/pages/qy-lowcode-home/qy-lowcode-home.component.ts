@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { MenuItem, MessageService } from "primeng/api";
+import { MessageService } from "primeng/api";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
@@ -11,10 +11,10 @@ import { InputTextModule } from "primeng/inputtext";
 import { MenubarModule } from "primeng/menubar";
 import { OrderListModule } from "primeng/orderlist";
 import { OverlayPanelModule } from "primeng/overlaypanel";
-import { PanelMenuModule } from "primeng/panelmenu";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { SplitterModule } from "primeng/splitter";
-import { TieredMenuModule } from "primeng/tieredmenu";
+
+import { QyMenuFileComponent } from "../common/menu-file/menu-file.component";
 
 export interface Tile {
   color: string;
@@ -32,9 +32,9 @@ interface AutoCompleteCompleteEvent {
   selector: "qy-lowcode-home",
   standalone: true,
   imports: [
+    QyMenuFileComponent,
     OverlayPanelModule,
     CommonModule,
-    PanelMenuModule,
     SelectButtonModule,
     SplitterModule,
     OrderListModule,
@@ -44,8 +44,7 @@ interface AutoCompleteCompleteEvent {
     DropdownModule,
     FormsModule,
     InputTextModule,
-    MenubarModule,
-    TieredMenuModule
+    MenubarModule
   ],
   providers: [MessageService],
   templateUrl: "./qy-lowcode-home.component.html",
@@ -107,82 +106,4 @@ export class FormComponent implements OnInit {
     { icon: "pi pi-align-center", justify: "Center" },
     { icon: "pi pi-align-justify", justify: "Justify" }
   ];
-
-  itemsnode: MenuItem[] = [
-    {
-      label: "APP",
-      icon: "pi pi-copy",
-      items: [
-        {
-          label: "Documents",
-          icon: "pi pi-copy",
-          items: [
-            {
-              label: "Clients",
-              icon: "pi pi-file"
-            },
-            {
-              label: "Clients",
-              icon: "pi pi-file"
-            },
-            {
-              label: "Clients",
-              icon: "pi pi-file"
-            }
-          ]
-        },
-        {
-          label: "Images",
-          icon: "pi pi-copy",
-          items: [
-            {
-              label: "Logos",
-              icon: "pi pi-file"
-            }
-          ]
-        }
-      ]
-    }
-  ];
-
-  child = [
-    {
-      label: "页面",
-      icon: "pi pi-plus",
-      command: (event: any) => {
-        throw "";
-      }
-    },
-    {
-      label: "部件",
-      icon: "pi pi-eject",
-      command: (event: any) => {
-        throw "";
-      }
-    },
-    {
-      label: "重命名",
-      icon: "pi pi-sync",
-      command: (event: any) => {
-        throw "";
-      }
-    },
-    {
-      separator: true
-    },
-    {
-      label: "删除",
-      icon: "pi pi-trash",
-      mClass: "text-red hover:bg-red-1 hover:rounded-4px",
-      command: (event: any) => {
-        throw "";
-      }
-    }
-  ];
-
-  mouseleave(event: any, cb: any): void {
-    if (event.toElement.classList.contains("file-node")) {
-      cb(event);
-    }
-  }
 }

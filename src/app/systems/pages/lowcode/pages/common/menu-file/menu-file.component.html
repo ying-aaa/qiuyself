@@ -1,0 +1,13 @@
+<div class="col w-100% p-8px">
+  <p-panelMenu [model]="qyLowcodeService.menuFiles()" styleClass="w-full h-100% file-menu">
+    <ng-template pTemplate="item" let-item>
+      <a pRipple class="file-node flex items-center px-3 py-2 cursor-pointer text-14px">
+        <i [class]="(item.items && item.expanded ? 'pi pi-crown' : item.icon) + ' text-primary ' + (item.type === QMenuFileType.directory ? 'text-blue text-20px' : '')"></i>
+        <span class="ml-2 flex-1">
+          {{ item.label }}
+        </span>
+        <qy-menu-file-handle></qy-menu-file-handle>
+      </a>
+    </ng-template>
+  </p-panelMenu>
+</div>
