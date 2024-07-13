@@ -19,12 +19,12 @@ export enum QSvgType {
   standalone: true,
   imports: [CommonModule, TieredMenuModule],
   template: `
-    <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="mouseleave($event, menu.toggle.bind(menu))" #item>
+    <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="handleOut($event, 'qy-menu', menu.toggle.bind(menu))" #item>
       <i class="pi pi-ellipsis-h display-none hover:block text-14px" style="color: slateblue"></i>
     </span>
-    <p-tieredMenu appendTo="body" [autoDisplay]="false" (mouseleave)="menu.hide($event)" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="-translate-x-50% w-120px mt-0!">
+    <p-tieredMenu (mouseleave)="menu.hide($event)" [autoDisplay]="false" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="qy-menu -translate-x-50% w-120px mt-0!">
       <ng-template pTemplate="item" let-item>
-        <a pRipple class="file-node flex items-center px-8px py-5px cursor-pointer text-14px" [class]="item.mClass">
+        <a pRipple class="qy-menu-item file-node flex items-center px-8px py-5px cursor-pointer text-14px" [class]="item.mClass">
           @if (item.svgType) {
             <img [src]="'assets/icons/' + item.svgType + '.svg'" class="w-15px h-15px" />
           } @else {
@@ -44,10 +44,15 @@ export class QyMenuFileHandleComponent {
 
   constructor(public qyLowcodeService: QyLowcodeService) {}
 
-  mouseleave(event: any, cb: any): void {
-    if (event.toElement.classList.contains("file-node")) {
+  handleOut(event: any, outClassNmae: string, cb: any): void {
+    if (!outClassNmae.split(".").some(name => event.toElement.classList.contains(name))) {
       cb(event);
     }
+    // }
+    // if (isMouseWrapperStay || !event.toElement.classList.contains("qy-menu")) {
+    //   console.log("%c Line:58 🍑", "color:#7f2b82");
+    //   cb(event);
+    // }
   }
 
   child = [
