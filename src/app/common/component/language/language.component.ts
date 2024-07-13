@@ -11,44 +11,44 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
       <!-- 1 -->
       <div class="h-64px flex justify-center">
         <div class="wh-64 border-rd-12px bg-#1296db4d backdrop-blur-5px flex-center">
-          <img src="assets/self/language/mysql.png" class="w-50px h-50px drop-shadow-[0px_0px_15px_#1296DB]" />
+          <img src="assets/language/mysql.png" class="w-50px h-50px drop-shadow-[0px_0px_15px_#1296DB]" />
           <!-- <div class="a"></div> -->
         </div>
       </div>
       <!-- 2 -->
       <div class="h-64px flex justify-between items-center">
         <div class="wh-64 language-wrapper bg-#039bc64d">
-          <img src="assets/self/language/docker.png" class="w-48px h-48px drop-shadow-[0px_0px_15px_#039BC6]" />
+          <img src="assets/language/docker.png" class="w-48px h-48px drop-shadow-[0px_0px_15px_#039BC6]" />
         </div>
         <div>
           <ng-container [ngTemplateOutlet]="ConnectLine" />
         </div>
         <div class="wh-64 language-wrapper bg-#e0234e4d">
-          <img src="assets/self/language/nest.png" class="wh-54 drop-shadow-[0px_0px_15px_#E0234E]" />
+          <img src="assets/language/nest.png" class="wh-54 drop-shadow-[0px_0px_15px_#E0234E]" />
         </div>
       </div>
       <!-- 3 -->
       <div class="h-64px flex-center">
         <div class="wh-64 language-wrapper bg-#ff00844d">
-          <img src="assets/self/language/angular.png" class="wh-54 drop-shadow-[0px_0px_15px_#C3002F]" />
+          <img src="assets/language/angular.png" class="wh-54 drop-shadow-[0px_0px_15px_#C3002F]" />
         </div>
       </div>
       <!-- 4 -->
       <div class="h-64px flex justify-between items-center">
         <div class="wh-64 language-wrapper bg-#4568ef4d">
-          <img src="assets/self/language/devui.png" class="wh-54 drop-shadow-[0px_0px_15px_#4568EF]" />
+          <img src="assets/language/devui.png" class="wh-54 drop-shadow-[0px_0px_15px_#4568EF]" />
         </div>
         <div class="rotate-180">
           <ng-container [ngTemplateOutlet]="ConnectLine" />
         </div>
         <div class="wh-64 language-wrapper bg-#8ed6fb4d">
-          <img src="assets/self/language/webpack.png" class="wh-54 drop-shadow-[0px_0px_15px_#8ED6FB]" />
+          <img src="assets/language/webpack.png" class="wh-54 drop-shadow-[0px_0px_15px_#8ED6FB]" />
         </div>
       </div>
       <!-- 5 -->
       <div class="h-64px flex-center">
         <div class="wh-64 language-wrapper bg-#689f634d">
-          <img src="assets/self/language/node.png" class="wh-54 drop-shadow-[0px_0px_15px_#689F63]" />
+          <img src="assets/language/node.png" class="wh-54 drop-shadow-[0px_0px_15px_#689F63]" />
         </div>
       </div>
     </div>

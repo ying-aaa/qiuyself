@@ -39,7 +39,7 @@ const cesiumStyle = {
             <div class="lh-24px">基于 Angular + Nest</div>
           </div>
         </div>
-        <img src="assets/self/home/qiuy.pic.jpg" class="backdrop-fit" width="100%" height="100%" />
+        <img src="assets/home/qiuy.pic.jpg" class="backdrop-fit" width="100%" height="100%" />
       </div>
       <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
@@ -51,7 +51,7 @@ const cesiumStyle = {
         width: 100%;
         height: 100%;
         // position: relative;
-        background-image: url("/assets/self/home/starry-sky.png");
+        background-image: url("/assets/home/starry-sky.png");
         background-size: cover;
       }
       .self-backdrop-fit {

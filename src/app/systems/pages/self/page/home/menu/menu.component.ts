@@ -1,11 +1,21 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from "@angular/core";
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Router, RouterModule } from "@angular/router";
 
-import menuIcon from "./menu-icon";
-
+// @ts-ignore
+// import more from "@assets/icons/more.svg";
+// console.log("%c Line:7 🍯 more", "color:#2eafb0", more);
+// import { home_icon, self_icon, cooperation_icon, event_icon, search_icon, more_icon } from "./menu-icon";
+// const menuIcon = {
+//   home_icon,
+//   self_icon,
+//   cooperation_icon,
+//   event_icon,
+//   search_icon,
+//   more_icon
+// };
 interface IMenuStructure {
   name: string;
   navigatorUrl: string;
@@ -20,7 +30,7 @@ interface IMenuStructure {
       <div class="flex w-fit">
         @for (item of menus(); track $index) {
           <div routerLinkActive="active" [routerLink]="['/lowcode']" class="text-18px px-24px text-#fff cursor-pointer h-30px flex items-end font-bold hover:drop-shadow-[0px_0px_10px_#a0d8ff]">
-            <mat-icon [svgIcon]="item.icon" aria-hidden="false" class="w-28px! h-28px!" aria-label="Example thumbs up SVG icon"></mat-icon>
+            <img [src]="'assets/icons/' + item.icon + '.svg'" class="w-24px h-24px" />
             <div *ngIf="item.name" class="lh-24px ml-8px">{{ item.name }}</div>
           </div>
         }
@@ -31,16 +41,7 @@ interface IMenuStructure {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {
-  constructor(
-    private router: Router,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
-  ) {
-    this.menus().forEach((menu: IMenuStructure) => {
-      // @ts-ignore
-      iconRegistry.addSvgIconLiteral(menu.icon, sanitizer.bypassSecurityTrustHtml(menuIcon[`${menu.icon.toUpperCase()}_ICON`]));
-    });
-  }
+  constructor(private router: Router) {}
 
   navigateToPage(): void {
     // 使用 Router 服务进行路由跳转

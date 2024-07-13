@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   imports: [CommonModule],
   template: `
     <div class="qiuy-logo">
-      <img class="logo" src="assets/self/logo/logo.png" />
-      <img class="text" src="assets/self/logo/qiuy.png" />
+      <img class="logo" src="assets/logo/logo.png" />
+      <img class="text" src="assets/logo/qiuy.png" />
     </div>
   `,
   styleUrl: "./qiuy-logo.component.less",

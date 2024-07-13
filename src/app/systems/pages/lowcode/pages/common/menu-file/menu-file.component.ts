@@ -10,11 +10,6 @@ import { QyMenuFileHandleComponent } from "./common/menu-file-handle/menu-file-h
 import { QMenuFileType } from "../../../type/qy-lowcode-home.typs";
 import { QyLowcodeService } from "../../services/qy-lowcode.service";
 
-class GenerationMenuFile {
-  constructor(qyMenuFileComponent: QyMenuFileComponent) {
-    console.log("%c Line:14 🍬 qyMenuFileComponent", "color:#e41a6a", qyMenuFileComponent);
-  }
-}
 @Component({
   selector: "qy-menu-file",
   standalone: true,
@@ -32,7 +27,5 @@ export class QyMenuFileComponent implements OnInit {
 
   constructor(public qyLowcodeService: QyLowcodeService) {}
 
-  ngOnInit(): void {
-    new GenerationMenuFile(this);
-  }
+  ngOnInit(): void {}
 }
