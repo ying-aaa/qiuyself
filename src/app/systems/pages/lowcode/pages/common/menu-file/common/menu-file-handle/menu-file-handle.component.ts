@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
 
 import { QMenuFileType } from "@app/systems/pages/lowcode/type/qy-lowcode-home.typs";
 import { home_icon } from "@app/systems/pages/self/page/home/menu/menu-icon";
@@ -22,7 +22,7 @@ export enum QSvgType {
     <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="mouseleave($event, menu.toggle.bind(menu))" #item>
       <i class="pi pi-ellipsis-h display-none hover:block text-14px" style="color: slateblue"></i>
     </span>
-    <p-tieredMenu [autoDisplay]="false" (mouseleave)="menu.hide($event)" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="-translate-x-50% w-120px mt-0!">
+    <p-tieredMenu appendTo="body" [autoDisplay]="false" (mouseleave)="menu.hide($event)" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="-translate-x-50% w-120px mt-0!">
       <ng-template pTemplate="item" let-item>
         <a pRipple class="file-node flex items-center px-8px py-5px cursor-pointer text-14px" [class]="item.mClass">
           @if (item.svgType) {
@@ -57,17 +57,17 @@ export class QyMenuFileHandleComponent {
       svgType: QSvgType.file,
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-        this.qyLowcodeService.menuFiles.update((value: any) => {
-          const data = this.qyLowcodeService.menuFiles();
-          data[0]?.items?.push({
-            label: "xxx",
-            icon: "pi pi-file",
-            type: QMenuFileType.file,
-            nanoid
-          });
-          return data;
+        const data = this.qyLowcodeService.menuFiles$.getValue();
+        console.log("%c Line:64 🍯 data", "color:#3f7cff", data);
+        data[0]?.items?.push({
+          label: "xxx",
+          icon: "pi pi-file",
+          type: QMenuFileType.file,
+          nanoid
         });
-        throw "";
+        this.qyLowcodeService.menuFiles$.next(data);
+        // // throw "";
+        // this.cdr.detectChanges();
       }
     },
     {
@@ -76,16 +76,16 @@ export class QyMenuFileHandleComponent {
       svgType: QSvgType.directory_close,
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-        this.qyLowcodeService.menuFiles.update((value: any) => {
-          const data = this.qyLowcodeService.menuFiles();
-          data[0]?.items?.push({
-            label: "xxx",
-            icon: "pi pi-file",
-            type: QMenuFileType.directory,
-            nanoid
-          });
-          return data;
-        });
+        // this.qyLowcodeService.menuFiles.update((value: any) => {
+        //   const data = this.qyLowcodeService.menuFiles();
+        //   data[0]?.items?.push({
+        //     label: "xxx",
+        //     icon: "pi pi-file",
+        //     type: QMenuFileType.directory,
+        //     nanoid
+        //   });
+        //   return data;
+        // });
       }
     },
     {
