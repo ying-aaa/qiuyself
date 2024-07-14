@@ -48,11 +48,6 @@ export class QyMenuFileHandleComponent {
     if (!outClassNmae.split(".").some(name => event.toElement.classList.contains(name))) {
       cb(event);
     }
-    // }
-    // if (isMouseWrapperStay || !event.toElement.classList.contains("qy-menu")) {
-    //   console.log("%c Line:58 🍑", "color:#7f2b82");
-    //   cb(event);
-    // }
   }
 
   child = [
@@ -63,7 +58,6 @@ export class QyMenuFileHandleComponent {
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
         const data = this.qyLowcodeService.menuFiles$.getValue();
-        console.log("%c Line:64 🍯 data", "color:#3f7cff", data);
         data[0]?.items?.push({
           label: "xxx",
           icon: "pi pi-file",
@@ -71,8 +65,6 @@ export class QyMenuFileHandleComponent {
           nanoid
         });
         this.qyLowcodeService.menuFiles$.next(data);
-        // // throw "";
-        // this.cdr.detectChanges();
       }
     },
     {
@@ -81,16 +73,6 @@ export class QyMenuFileHandleComponent {
       svgType: QSvgType.directory_close,
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-        // this.qyLowcodeService.menuFiles.update((value: any) => {
-        //   const data = this.qyLowcodeService.menuFiles();
-        //   data[0]?.items?.push({
-        //     label: "xxx",
-        //     icon: "pi pi-file",
-        //     type: QMenuFileType.directory,
-        //     nanoid
-        //   });
-        //   return data;
-        // });
       }
     },
     {
