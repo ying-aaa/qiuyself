@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <div class="card h-100%">
   <p-splitter [style]="{ height: '100%' }" [panelSizes]="[18, 82]" [minSizes]="[10, 0]" styleClass="mb-5">
     <ng-template pTemplate>
@@ -8,7 +9,12 @@
         <ng-template pTemplate></ng-template>
         <ng-template pTemplate>
           <p-splitter [panelSizes]="[80, 20]">
-            <ng-template pTemplate></ng-template>
+            <ng-template pTemplate>
+              <div>
+                @let pTemplate = false ? 12334324 : 4235;
+                {{ pTemplate }}
+              </div>
+            </ng-template>
             <ng-template pTemplate></ng-template>
           </p-splitter>
         </ng-template>

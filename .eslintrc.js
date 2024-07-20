@@ -167,14 +167,15 @@ module.exports = {
     {
       files: ["*.html"],
       extends: ["plugin:@angular-eslint/template/recommended"],
-      rules: {}
+      rules: { "no-undef": "off" }
     },
     {
       files: ["*.html"],
       excludedFiles: ["*inline-template-*.component.html"],
       extends: ["plugin:prettier/recommended"],
       rules: {
-        "prettier/prettier": ["error", { parser: "angular" }]
+        "prettier/prettier": ["error", { parser: "angular" }],
+        "no-undef": "off" 
       }
     }
   ]
