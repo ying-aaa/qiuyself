@@ -4,7 +4,8 @@
     <ng-template pTemplate="item" let-item>
       <a pRipple class="file-node flex items-center px-3 py-2 cursor-pointer text-14px">
         @if (item.type === QMenuFileType.directory) {
-          <img class="w-20px h-20px" [src]="'assets/icons/' + (item.items && item.expanded ? 'directory_open' : 'directory_close') + '.svg'" />
+          @let file = item.items && item.expanded ? 'directory_open' : 'directory_close';
+          <img class="w-20px h-20px" [src]="'assets/icons/' + file + '.svg'" />
         } @else {
           <img class="w-20px h-20px" [src]="'assets/icons/file.svg'" />
         }

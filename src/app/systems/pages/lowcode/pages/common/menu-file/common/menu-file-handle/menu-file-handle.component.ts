@@ -2,17 +2,18 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
 
 import { QMenuFileType } from "@app/systems/pages/lowcode/type/qy-lowcode-home.typs";
-import { home_icon } from "@app/systems/pages/self/page/home/menu/menu-icon";
 import { customAlphabet } from "nanoid";
 import { TieredMenuModule } from "primeng/tieredmenu";
 
 import { QyLowcodeService } from "../../../../services/qy-lowcode.service";
+
 export enum QSvgType {
   directory_open = "directory_open",
   directory_close = "directory_close",
   file = "file",
   renaming = "renaming",
-  delete = "delete"
+  delete = "delete",
+  data = "data"
 }
 @Component({
   selector: "qy-menu-file-handle",

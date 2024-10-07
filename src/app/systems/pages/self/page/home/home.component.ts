@@ -51,7 +51,9 @@ const cesiumStyle = {
         width: 100%;
         height: 100%;
         // position: relative;
-        background-image: url("/assets/home/starry-sky.png");
+        // background-image: url("/assets/home/starry-sky.png");
+        background: radial-gradient(50% 50% at 50% 50%, #001c6c 0%, #06080e 100%);
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
         background-size: cover;
       }
       .self-backdrop-fit {

@@ -35,6 +35,7 @@ export class QyMenuFileComponent implements OnInit, OnDestroy {
   ) {}
 
   menuFiles: MenuItem[] = [];
+
   ngOnInit(): void {
     this.menuFileSubscribe = this.qyLowcodeService.menuFiles$.subscribe(res => {
       this.menuFiles = res;
