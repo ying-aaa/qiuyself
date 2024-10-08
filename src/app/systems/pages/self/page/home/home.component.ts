@@ -1,13 +1,15 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, Signal, signal, viewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Signal, signal, viewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 
 import { LanguageComponent } from "@app/common/component/language/language.component";
 import { QiuyLogoComponent } from "@app/common/component/qiuy-logo/qiuy-logo.component";
+import { UiverseSwitchFootprintComponent } from "@app/common/uiverse/switch-footprint/uiverse-switch-footprint.component";
 import { BaseCesiumComponent } from "@app/widget/base-cesium/base-cesium.component";
 import { QyCesiumService } from "@app/widget/base-cesium/base-cesium.service";
 
+import { QyHomeService } from "./home.service";
 import { MenuComponent } from "./menu/menu.component";
 
 const cesiumStyle = {
@@ -43,61 +45,32 @@ const cesiumStyle = {
       </div>
       <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
+      <div class="text-#fff absolute bottom-50px right-50px">
+        111{{ homeService.isFootprintMode }}
+        <uiverse-switch-footprint [isFootprintMode]="homeService.isFootprintMode" [switchEvent]="homeService.setFootprintMode"></uiverse-switch-footprint>
+      </div>
     </div>
   `,
-  styles: `
-    :host {
-      .self-container {
-        width: 100%;
-        height: 100%;
-        // position: relative;
-        // background-image: url("/assets/home/starry-sky.png");
-        background: radial-gradient(50% 50% at 50% 50%, #001c6c 0%, #06080e 100%);
-        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-        background-size: cover;
-      }
-      .self-backdrop-fit {
-        background-position: -30% 50%;
-        background-size: cover;
-        object-fit: cover;
-      }
-      .shape {
-        z-index: 999;
-        width: 460px;
-        height: 460px;
-        top: 220px;
-        right: 20%;
-        position: absolute;
-        img {
-          border-radius: 73% 27% 75% 25% / 60% 72% 28% 40%;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          transform: scale(1.25);
-          left: 35%;
-          bottom: -100px;
-          background-color: rgba(255, 255, 255, 0.1);
-          border-radius: 73% 27% 75% 25% / 60% 72% 28% 40%;
-          backdrop-filter: blur(5px);
-          z-index: -1;
-        }
-      }
-    }
-  `,
+  styleUrl: "./home.component.less",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent, LanguageComponent, MenuComponent]
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent, LanguageComponent, MenuComponent, UiverseSwitchFootprintComponent]
 })
 export class HomeComponent implements AfterViewInit {
   baseCesium = viewChild.required(BaseCesiumComponent);
 
   public cesiumService = inject(QyCesiumService);
+  public homeService = inject(QyHomeService);
+  public cdr = inject(ChangeDetectorRef);
+
   cesiumStyle = cesiumStyle;
 
   ngAfterViewInit(): void {
     this.flyto();
+
+    setTimeout(() => {
+      this.homeService.setFootprintMode(false);
+      this.cdr.detectChanges();
+    }, 2000);
   }
 
   flyto(): void {
