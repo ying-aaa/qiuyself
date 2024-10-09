@@ -1,7 +1,11 @@
+import { animate, keyframes, state, style, transition, trigger } from "@angular/animations";
+import { CommonModule } from "@angular/common";
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Signal, signal, viewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { LanguageComponent } from "@app/common/component/language/language.component";
 import { QiuyLogoComponent } from "@app/common/component/qiuy-logo/qiuy-logo.component";
@@ -26,10 +30,12 @@ const cesiumStyle = {
   template: `
     <div class="self-container self-backdrop-fit">
       <qy-qiuy-logo class="cursor-pointer" (click)="flyto()"></qy-qiuy-logo>
-      <qy-language></qy-language>
+      <!-- 足迹模式时隐藏首页提要！ -->
+      @let animationsName = qyHomeService.isFootprintMode ? "out-circle-hesitate1" : "in-circle-hesitate1";
+      @let animationState = qyHomeService.isFootprintMode ? "out" : "in";
+      <qy-language class="absolute z-100 left-10% top-20%" [class]="animationsName" [@circleAnimation]="animationState"></qy-language>
 
-      <!-- <div class="shape qiuy-photo"></div> -->
-      <div class="shape qiuy-photo-bg">
+      <div class="shape qiuy-photo-bg" [class]="animationsName" [@circleAnimation]="animationState">
         <div class="absolute z-999 w-306px font-bold -right-105% -translate-x-50% top-202px">
           <div class="text-42px mb-28px">
             <div class="lh-45px text-#a193c6">Not reading</div>
@@ -41,36 +47,68 @@ const cesiumStyle = {
             <div class="lh-24px">基于 Angular + Nest</div>
           </div>
         </div>
-        <img src="assets/home/qiuy.pic.jpg" class="backdrop-fit" width="100%" height="100%" />
+        <img src="assets/home/qiuy.pic2.jpg" class="backdrop-fit" width="100%" height="100%" />
       </div>
       <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
       <div class="text-#fff absolute bottom-50px right-50px">
-        111{{ homeService.isFootprintMode }}
-        <uiverse-switch-footprint [isFootprintMode]="homeService.isFootprintMode" [switchEvent]="homeService.setFootprintMode"></uiverse-switch-footprint>
+        <uiverse-switch-footprint [isFootprintMode]="qyHomeService.isFootprintMode" (onSwitchChange)="onSwitchChange($event)"></uiverse-switch-footprint>
       </div>
     </div>
   `,
   styleUrl: "./home.component.less",
+  animations: [
+    trigger("circleAnimation", [
+      state(
+        "in",
+        style({
+          clipPath: "circle(125%)"
+        })
+      ),
+      state(
+        "out",
+        style({
+          clipPath: "circle(0%)"
+        })
+      ),
+      transition("* => in", [animate("5s cubic-bezier(.25, 1, .30, 1)", keyframes([style({ clipPath: "circle(0%)" }), style({ clipPath: "circle(40%)" }), style({ clipPath: "circle(125%)" })]))]),
+      transition("* => out", [animate("5s cubic-bezier(.25, 1, .30, 1)", keyframes([style({ clipPath: "circle(125%)" }), style({ clipPath: "circle(40%)" }), style({ clipPath: "circle(0%)" })]))])
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, BaseCesiumComponent, QiuyLogoComponent, LanguageComponent, MenuComponent, UiverseSwitchFootprintComponent]
+  imports: [
+    CommonModule,
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    BaseCesiumComponent,
+    QiuyLogoComponent,
+    LanguageComponent,
+    MenuComponent,
+    UiverseSwitchFootprintComponent
+  ]
 })
 export class HomeComponent implements AfterViewInit {
   baseCesium = viewChild.required(BaseCesiumComponent);
 
-  public cesiumService = inject(QyCesiumService);
-  public homeService = inject(QyHomeService);
-  public cdr = inject(ChangeDetectorRef);
+  constructor(
+    public qyHomeService: QyHomeService,
+    public qyCesiumService: QyCesiumService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
+  // animationState: "in" | "out" = "in";
   cesiumStyle = cesiumStyle;
 
   ngAfterViewInit(): void {
     this.flyto();
+  }
 
-    setTimeout(() => {
-      this.homeService.setFootprintMode(false);
-      this.cdr.detectChanges();
-    }, 2000);
+  onSwitchChange(value: boolean): void {
+    // this.animationState = value ? "out" : "in";
+    this.qyHomeService.setFootprintMode(value);
   }
 
   flyto(): void {

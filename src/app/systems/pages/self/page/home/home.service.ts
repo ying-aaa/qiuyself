@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root"
 })
 export class QyHomeService {
-  isFootprintMode: boolean = true;
+  isFootprintMode: boolean = false;
   constructor() {}
 
   getFootprintMode(): boolean {
@@ -12,7 +12,6 @@ export class QyHomeService {
   }
 
   setFootprintMode(FootprintModeValue: boolean): void {
-    console.log("FootprintModeValue", FootprintModeValue);
     this.isFootprintMode = FootprintModeValue;
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, Input, input, Signal, ViewChild, OnInit, AfterViewInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Input, input, Signal, ViewChild, OnInit, AfterViewInit, EventEmitter, output } from "@angular/core";
 
 import { TooltipModule } from "primeng/tooltip";
 
@@ -9,7 +9,7 @@ import { TooltipModule } from "primeng/tooltip";
   imports: [CommonModule, TooltipModule],
   template: `
     <label pTooltip="我的足迹" tooltipPosition="top" class="plane-switch">
-      <input #checkbox [(value)]="_isFootprintMode" type="checkbox" (change)="_switchEvent($event)" />
+      <input #checkbox [value]="isFootprintMode" type="checkbox" (change)="switchChange($event)" />
       <div>
         <div>
           <svg viewBox="0 0 13 13">
@@ -31,31 +31,19 @@ import { TooltipModule } from "primeng/tooltip";
 export class UiverseSwitchFootprintComponent implements AfterViewInit {
   @ViewChild("checkbox", { static: true }) checkboxRef: ElementRef | undefined;
 
-  @Input()
-  set isFootprintMode(value) {
-    this._isFootprintMode = value;
+  readonly onSwitchChange = output<boolean>();
 
-    const checkbox = this.checkboxRef?.nativeElement;
-    checkbox.checked = this._isFootprintMode; // 切换复选框的状态
-  }
-  get isFootprintMode(): boolean {
-    return this._isFootprintMode;
-  }
-  _isFootprintMode: boolean = false;
-  switchEvent = input.required<Function>();
+  @Input() isFootprintMode = false;
 
-  _switchEvent(event: Event): void {
-    // this.switchEvent()(false);
+  switchChange(event: any): void {
+    this.onSwitchChange.emit(event.target.checked);
   }
 
   triggerCheckbox(): void {
-    console.log("checkbox", this.checkboxRef);
-
     const checkbox = this.checkboxRef?.nativeElement;
-    checkbox.checked = this._isFootprintMode; // 切换复选框的状态
-    // checkbox.dispatchEvent(new Event("change")); // 触发change事件
+    checkbox.checked = this.isFootprintMode;
   }
   ngAfterViewInit(): void {
-    // this.triggerCheckbox();
+    this.triggerCheckbox();
   }
 }
