@@ -23,6 +23,7 @@ import { QyCesiumService } from "./base-cesium.service";
 })
 export class BaseCesiumComponent implements AfterViewInit {
   @Input("styles") styles = {};
+
   cesiumInstance: TemplateRef<Element> | any = viewChild<ElementRef>("cesiumContainer");
 
   public cesiumService = inject(QyCesiumService);

@@ -31,6 +31,7 @@
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.2",
     "cesium": "^1.118.2",
+    "cesium-types": "^1.118.2",
     "express": "^4.18.2",
     "nanoid": "^5.0.7",
     "primeicons": "^7.0.0",

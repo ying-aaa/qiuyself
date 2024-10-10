@@ -33,9 +33,9 @@ const cesiumStyle = {
       <!-- 足迹模式时隐藏首页提要！ -->
       @let animationsName = qyHomeService.isFootprintMode ? "out-circle-hesitate1" : "in-circle-hesitate1";
       @let animationState = qyHomeService.isFootprintMode ? "out" : "in";
-      <qy-language class="absolute z-100 left-10% top-20%" [class]="animationsName" [@circleAnimation]="animationState"></qy-language>
+      <qy-language class="absolute z-100 left-10% top-20% clipPath-0" [class]="animationsName" [@circleAnimation]="animationState"></qy-language>
 
-      <div class="shape qiuy-photo-bg" [class]="animationsName" [@circleAnimation]="animationState">
+      <div class="shape qiuy-photo-bg clipPath-0" [class]="animationsName" [@circleAnimation]="animationState">
         <div class="absolute z-999 w-306px font-bold -right-105% -translate-x-50% top-202px">
           <div class="text-42px mb-28px">
             <div class="lh-45px text-#a193c6">Not reading</div>
@@ -52,6 +52,7 @@ const cesiumStyle = {
       <qy-menu></qy-menu>
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
       <div class="text-#fff absolute bottom-50px right-50px">
+        {{ animationState }}
         <uiverse-switch-footprint [isFootprintMode]="qyHomeService.isFootprintMode" (onSwitchChange)="onSwitchChange($event)"></uiverse-switch-footprint>
       </div>
     </div>
@@ -59,6 +60,12 @@ const cesiumStyle = {
   styleUrl: "./home.component.less",
   animations: [
     trigger("circleAnimation", [
+      state(
+        "void", // 定义一个初始状态，命名为 "void"
+        style({
+          clipPath: "circle(0%)" // 初始状态设置为0%
+        })
+      ),
       state(
         "in",
         style({
@@ -72,7 +79,7 @@ const cesiumStyle = {
         })
       ),
       transition("* => in", [animate("5s cubic-bezier(.25, 1, .30, 1)", keyframes([style({ clipPath: "circle(0%)" }), style({ clipPath: "circle(40%)" }), style({ clipPath: "circle(125%)" })]))]),
-      transition("* => out", [animate("5s cubic-bezier(.25, 1, .30, 1)", keyframes([style({ clipPath: "circle(125%)" }), style({ clipPath: "circle(40%)" }), style({ clipPath: "circle(0%)" })]))])
+      transition("* => out", [animate("3s cubic-bezier(.25, 1, .30, 1)", keyframes([style({ clipPath: "circle(125%)" }), style({ clipPath: "circle(40%)" }), style({ clipPath: "circle(0%)" })]))])
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -103,15 +110,16 @@ export class HomeComponent implements AfterViewInit {
   cesiumStyle = cesiumStyle;
 
   ngAfterViewInit(): void {
-    this.flyto();
+    this.flyto("HalfRound");
   }
 
   onSwitchChange(value: boolean): void {
-    // this.animationState = value ? "out" : "in";
+    const chinaViewType = value ? "OverLooking" : "HalfRound";
+    this.flyto(chinaViewType);
     this.qyHomeService.setFootprintMode(value);
   }
 
-  flyto(): void {
-    this.baseCesium().cesiumService.flight();
+  flyto(chinaViewType: string = "HalfRound"): void {
+    this.qyCesiumService.flightChinas(chinaViewType);
   }
 }
