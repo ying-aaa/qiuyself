@@ -52,13 +52,18 @@
 .-right-105\%{right:-105%;}
 .bottom-50px{bottom:50px;}
 .left-10\%{left:10%;}
+.left-30px{left:30px;}
 .right-50px{right:50px;}
+.top-10\%{top:10%;}
 .top-20\%{top:20%;}
 .top-202px{top:202px;}
 .z-999{z-index:999;}
 .mb-28px{margin-bottom:28px;}
+.h-85\%{height:85%;}
+.w-225px{width:225px;}
 .w-306px{width:306px;}
 .-translate-x-50\%{--un-translate-x:-50%;transform:translateX(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z)) skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));}
+.rounded-12px{border-radius:12px;}
 .text-right{text-align:right;}
 .text-16px{font-size:16px;}
 .text-42px{font-size:42px;}
