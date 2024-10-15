@@ -131,6 +131,7 @@ export class HomeComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.flyto("HalfRound");
+    this.qyCesiumService.addEntity();
   }
 
   onSwitchChange(value: boolean): void {

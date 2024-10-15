@@ -1,13 +1,16 @@
 // @ts-nocheck
 import { Injectable } from "@angular/core";
 
-declare var Cesium: any;
+import { CesiumWidget, Viewer } from "cesium";
+
+declare var Cesium: CesiumWidget;
 export type ChinaViewsConfigProps = "HalfRound" | "OverLooking";
+
 @Injectable({
   providedIn: "root"
 })
 export class QyCesiumService {
-  public viewer: any;
+  public viewer: Viewer;
 
   // 基础中国视角
   chinaViewsConfig: ChinaViewsConfig = {
@@ -91,6 +94,36 @@ export class QyCesiumService {
         roll: roll
       });
     });
+
+    this.initClickEvent();
+  }
+
+  addEntity(): void {
+    this.viewer.entities.add({
+      name: "Earth",
+      show: true,
+      position: {
+        x: -2003005.1032521657,
+        y: 4995533.494049504,
+        z: 3410987.2978949808
+      },
+      label: {
+        text: "我的家",
+        font: "18px sans-serif",
+        style: Cesium.LabelStyle.FILL,
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2
+      },
+      billboard: {
+        image: "assets/material/blue-border-bg.png",
+        width: 300,
+        height: 158,
+        verticalOrigin: Cesium.VerticalOrigin.CENTER,
+        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+        pixelOffset: new Cesium.Cartesian2(0, 0)
+      }
+    });
   }
 
   flightChinas(ChinaViewsConfig): void {
@@ -100,5 +133,19 @@ export class QyCesiumService {
       orientation: this.chinaViewsConfig[ChinaViewsConfig].orientation,
       duration: 2.5 // 动画持续时间，单位为秒
     });
+  }
+
+  initClickEvent(): void {
+    // return;
+    new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas).setInputAction(movement => {
+      // 获取点击位置的笛卡尔坐标
+      var position =
+        {
+          x: -2003005.1032521657,
+          y: 4995533.494049504,
+          z: 3410987.2978949808
+        } || this.viewer.scene.pickPosition(movement.position);
+      console.log("%c Line:136 🍋 position", "color:#ffdd4d", position);
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   }
 }

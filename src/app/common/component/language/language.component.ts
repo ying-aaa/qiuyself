@@ -18,10 +18,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
       <!-- 2 -->
       <div class="h-64px flex justify-between items-center">
         <div class="wh-64 language-wrapper bg-#039bc64d">
-          <img src="assets/language/docker.png" class="w-48px h-48px drop-shadow-[0px_0px_15px_#039BC6]" />
+          <img src="assets/language/docker.png" class="w-54px h-54px drop-shadow-[0px_0px_15px_#039BC6]" />
         </div>
         <div>
-          <ng-container [ngTemplateOutlet]="ConnectLine" />
+          <ng-container [ngTemplateOutlet]="ConnectLine" /> 
         </div>
         <div class="wh-64 language-wrapper bg-#e0234e4d">
           <img src="assets/language/nest.png" class="wh-54 drop-shadow-[0px_0px_15px_#E0234E]" />
