@@ -55,7 +55,7 @@ const cesiumStyle = {
         <img src="assets/home/qiuy.pic2.jpg" class="backdrop-fit" width="100%" height="100%" />
       </div>
       <!-- 左侧足迹片段 --> 
-      <qy-footprint-overview-fragment  class="w-225px rounded-12px h-85% absolute left-30px top-10% bg-red-10% z-100 ground-glass-10" [@circleAnimation]="animationState + '-fragment'"></qy-footprint-overview-fragment>
+      <qy-footprint-overview-fragment  class="w-80% rounded-12px absolute -translate-x-50% left-50% bottom-5% bg-red-10% z-100 ground-glass-10" [@circleAnimation]="animationState + '-fragment'"></qy-footprint-overview-fragment>
       <!-- 地图 -->
       <qy-base-cesium [styles]="cesiumStyle"></qy-base-cesium>
       <!-- 足迹切换 -->
