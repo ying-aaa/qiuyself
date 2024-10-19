@@ -2,7 +2,7 @@ import { Injectable, signal } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 
 import { customAlphabet } from "nanoid";
-import { MenuItem } from "primeng/api";
+interface MenuItem {}
 
 import { QMenuFileType } from "../../type/qy-lowcode-home.typs";
 

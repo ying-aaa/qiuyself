@@ -3,18 +3,6 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { MessageService } from "primeng/api";
-import { AutoCompleteModule } from "primeng/autocomplete";
-import { ButtonModule } from "primeng/button";
-import { DropdownModule } from "primeng/dropdown";
-import { FocusTrapModule } from "primeng/focustrap";
-import { InputTextModule } from "primeng/inputtext";
-import { MenubarModule } from "primeng/menubar";
-import { OrderListModule } from "primeng/orderlist";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { SelectButtonModule } from "primeng/selectbutton";
-import { SplitterModule } from "primeng/splitter";
-
 import { QyMenuFileComponent } from "../common/menu-file/menu-file.component";
 
 export interface Tile {
@@ -32,22 +20,8 @@ interface AutoCompleteCompleteEvent {
 @Component({
   selector: "qy-lowcode-home",
   standalone: true,
-  imports: [
-    QyMenuFileComponent,
-    OverlayPanelModule,
-    CommonModule,
-    SelectButtonModule,
-    SplitterModule,
-    OrderListModule,
-    AutoCompleteModule,
-    FocusTrapModule,
-    ButtonModule,
-    DropdownModule,
-    FormsModule,
-    InputTextModule,
-    MenubarModule
-  ],
-  providers: [MessageService],
+  imports: [],
+  providers: [],
   templateUrl: "./qy-lowcode-home.component.html",
   styleUrl: "./qy-lowcode-home.component.less",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -68,7 +42,7 @@ export class FormComponent implements OnInit {
   suggestions: any;
   menu: any;
 
-  constructor(private messageService: MessageService) {}
+  constructor() {}
 
   search(event: AutoCompleteCompleteEvent): void {
     this.suggestions = [...Array(10).keys()].map(item => `${event.query}-${item}`);

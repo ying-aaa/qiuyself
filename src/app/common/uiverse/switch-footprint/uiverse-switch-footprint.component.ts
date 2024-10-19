@@ -1,12 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, ElementRef, Input, input, Signal, ViewChild, OnInit, AfterViewInit, EventEmitter, output } from "@angular/core";
 
-import { TooltipModule } from "primeng/tooltip";
-
 @Component({
   selector: "uiverse-switch-footprint",
   standalone: true,
-  imports: [CommonModule, TooltipModule],
+  imports: [CommonModule],
   template: `
     <label pTooltip="我的足迹" tooltipPosition="top" class="plane-switch">
       <input #checkbox [value]="isFootprintMode" type="checkbox" (change)="switchChange($event)" />

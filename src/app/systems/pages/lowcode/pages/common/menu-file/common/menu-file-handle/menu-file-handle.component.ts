@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/
 
 import { QMenuFileType } from "@app/systems/pages/lowcode/type/qy-lowcode-home.typs";
 import { customAlphabet } from "nanoid";
-import { TieredMenuModule } from "primeng/tieredmenu";
 
 import { QyLowcodeService } from "../../../../services/qy-lowcode.service";
 
@@ -18,9 +17,9 @@ export enum QSvgType {
 @Component({
   selector: "qy-menu-file-handle",
   standalone: true,
-  imports: [CommonModule, TieredMenuModule],
+  imports: [CommonModule],
   template: `
-    <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="handleOut($event, 'qy-menu', menu.toggle.bind(menu))" #item>
+    <!-- <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="handleOut($event, 'qy-menu', menu.toggle.bind(menu))" #item>
       <i class="pi pi-ellipsis-h display-none hover:block text-14px" style="color: slateblue"></i>
     </span>
     <p-tieredMenu (mouseleave)="menu.hide($event)" [autoDisplay]="false" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="qy-menu -translate-x-50% w-120px mt-0!">
@@ -36,7 +35,7 @@ export enum QSvgType {
           </span>
         </a>
       </ng-template>
-    </p-tieredMenu>
+    </p-tieredMenu> -->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -58,7 +57,7 @@ export class QyMenuFileHandleComponent {
       svgType: QSvgType.file,
       command: (event: any) => {
         const nanoid = `qiuy1${customAlphabet("0123456789", 13)()}`;
-        const data = this.qyLowcodeService.menuFiles$.getValue();
+        const data = this.qyLowcodeService.menuFiles$.getValue() as any;
         data[0]?.items?.push({
           label: "xxx",
           icon: "pi pi-file",
