@@ -1,14 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { Component } from "@angular/core";
+import { NzTimelineModule } from "ng-zorro-antd/timeline";
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @Component({
   selector: "qy-footprint-overview-fragment",
   standalone: true,
-  imports: [CommonModule],
   templateUrl: "./footprint-overview-fragment.component.html",
   styleUrl: "./footprint-overview-fragment.component.less",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [CommonModule, NzTimelineModule, NzDropDownModule]
 })
-export class QyFootprintOverviewFragmentComponent {
-  constructor() {}
-}
+export class QyFootprintOverviewFragmentComponent {}

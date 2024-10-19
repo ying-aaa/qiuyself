@@ -15,6 +15,15 @@ module.exports = {
         project: ["tsconfig.json"],
         createDefaultProgram: true
       },
+      "object-curly-newline": [
+        "error",
+        {
+          ObjectExpression: "always",
+          ObjectPattern: { multiline: true },
+          ImportDeclaration: "never",
+          ExportDeclaration: { multiline: true, minProperties: 3 }
+        }
+      ],
       plugins: ["@typescript-eslint", "jsdoc", "import", "deprecation"],
       extends: ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates", "plugin:prettier/recommended"],
       rules: {
@@ -175,7 +184,7 @@ module.exports = {
       extends: ["plugin:prettier/recommended"],
       rules: {
         "prettier/prettier": ["error", { parser: "angular" }],
-        "no-undef": "off" 
+        "no-undef": "off"
       }
     }
   ]

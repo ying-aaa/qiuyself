@@ -34,12 +34,18 @@
                 "glob": "**/*",
                 "input": "node_modules/cesium/Build/Cesium",
                 "output": "./assets/cesium"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
               }
             ],
             "styles": [
               "src/styles/styles.less",
               "src/styles/uno.css",
               "@angular/material/prebuilt-themes/azure-blue.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "node_modules/cesium/Build/Cesium/Widgets/widgets.css"
 
             ],
