@@ -1,5 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component
+} from "@angular/core";
 
 import { QMenuFileType } from "@app/systems/pages/lowcode/type/qy-lowcode-home.typs";
 import { customAlphabet } from "nanoid";
@@ -19,16 +23,45 @@ export enum QSvgType {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <!-- <span class="ml-auto surface-border border-round text-xs flex-center pb-3px" (mouseenter)="menu.show($event)" (mouseleave)="handleOut($event, 'qy-menu', menu.toggle.bind(menu))" #item>
-      <i class="pi pi-ellipsis-h display-none hover:block text-14px" style="color: slateblue"></i>
+    <!-- <span
+      class="ml-auto surface-border border-round text-xs flex-center pb-3px"
+      (mouseenter)="menu.show($event)"
+      (mouseleave)="handleOut($event, 'qy-menu', menu.toggle.bind(menu))"
+      #item
+    >
+      <i
+        class="pi pi-ellipsis-h display-none hover:block text-14px"
+        style="color: slateblue"
+      ></i>
     </span>
-    <p-tieredMenu (mouseleave)="menu.hide($event)" [autoDisplay]="false" #menu [baseZIndex]="999" [model]="child" [popup]="true" styleClass="qy-menu -translate-x-50% w-120px mt-0!">
-      <ng-template pTemplate="item" let-item>
-        <a pRipple class="qy-menu-item file-node flex items-center px-8px py-5px cursor-pointer text-14px" [class]="item.mClass">
+    <p-tieredMenu
+      (mouseleave)="menu.hide($event)"
+      [autoDisplay]="false"
+      #menu
+      [baseZIndex]="999"
+      [model]="child"
+      [popup]="true"
+      styleClass="qy-menu -translate-x-50% w-120px mt-0!"
+    >
+      <ng-template
+        pTemplate="item"
+        let-item
+      >
+        <a
+          pRipple
+          class="qy-menu-item file-node flex items-center px-8px py-5px cursor-pointer text-14px"
+          [class]="item.mClass"
+        >
           @if (item.svgType) {
-            <img [src]="'assets/icons/' + item.svgType + '.svg'" class="w-15px h-15px" />
+            <img
+              [src]="'assets/icons/' + item.svgType + '.svg'"
+              class="w-15px h-15px"
+            />
           } @else {
-            <i [class]="item.icon + ' text-primary'" class="text-12px"></i>
+            <i
+              [class]="item.icon + ' text-primary'"
+              class="text-12px"
+            ></i>
           }
           <span class="ml-2">
             {{ item.label }}
@@ -45,7 +78,11 @@ export class QyMenuFileHandleComponent {
   constructor(public qyLowcodeService: QyLowcodeService) {}
 
   handleOut(event: any, outClassNmae: string, cb: any): void {
-    if (!outClassNmae.split(".").some(name => event.toElement.classList.contains(name))) {
+    if (
+      !outClassNmae
+        .split(".")
+        .some(name => event.toElement.classList.contains(name))
+    ) {
       cb(event);
     }
   }

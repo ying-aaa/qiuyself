@@ -67,7 +67,9 @@ export class QyCesiumService {
     this.viewer.scene.backgroundColor = new Cesium.Color(0.0, 0.0, 0.0, 0.0);
     this.viewer.scene.globe.enableLighting = true;
 
-    this.viewer.clock.currentTime = Cesium.JulianDate.fromIso8601("2023-01-01T12:08:00");
+    this.viewer.clock.currentTime = Cesium.JulianDate.fromIso8601(
+      "2023-01-01T12:08:00"
+    );
 
     this.viewer.camera.moveEnd.addEventListener(() => {
       // 获取相机的地理位置信息
@@ -127,7 +129,9 @@ export class QyCesiumService {
   }
 
   flightChinas(ChinaViewsConfig): void {
-    const fromDegreesConfig = Object.values(this.chinaViewsConfig[ChinaViewsConfig].destination);
+    const fromDegreesConfig = Object.values(
+      this.chinaViewsConfig[ChinaViewsConfig].destination
+    );
     this.viewer.camera.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(...fromDegreesConfig),
       orientation: this.chinaViewsConfig[ChinaViewsConfig].orientation,
@@ -137,15 +141,19 @@ export class QyCesiumService {
 
   initClickEvent(): void {
     // return;
-    new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas).setInputAction(movement => {
-      // 获取点击位置的笛卡尔坐标
-      var position =
-        {
-          x: -2003005.1032521657,
-          y: 4995533.494049504,
-          z: 3410987.2978949808
-        } || this.viewer.scene.pickPosition(movement.position);
-      console.log("%c Line:136 🍋 position", "color:#ffdd4d", position);
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas).setInputAction(
+      movement => {
+        // 获取点击位置的笛卡尔坐标
+        const position =
+          {
+            x: -2003005.1032521657,
+            y: 4995533.494049504,
+            z: 3410987.2978949808
+          } || this.viewer.scene.pickPosition(movement.position);
+      },
+      Cesium.ScreenSpaceEventType.LEFT_CLICK
+    );
+    console.log("生活常识");
   }
 }
+

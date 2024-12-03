@@ -37,7 +37,7 @@ export class FormComponent implements OnInit {
     { name: "Rome", code: "RM" },
     { name: "London", code: "LDN" },
     { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" }
+    { name: "Paris", code: "PRS" },
   ];
   suggestions: any;
   menu: any;
@@ -45,7 +45,9 @@ export class FormComponent implements OnInit {
   constructor() {}
 
   search(event: AutoCompleteCompleteEvent): void {
-    this.suggestions = [...Array(10).keys()].map(item => `${event.query}-${item}`);
+    this.suggestions = [...Array(10).keys()].map(
+      item => `${event.query}-${item}`
+    );
   }
   products: any = [
     {

@@ -10,4 +10,6 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
   styleUrl: "./footprint-overview-fragment.component.less",
   imports: [CommonModule, NzTimelineModule, NzDropDownModule]
 })
-export class QyFootprintOverviewFragmentComponent {}
+export class QyFootprintOverviewFragmentComponent {
+  
+}
